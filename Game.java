@@ -13,8 +13,8 @@ import javafx.stage.Stage;
 
 public class Game extends Application {
 
-	public static final double WINDOW_WIDTH = 1920;
-	public static final double WINDOW_HEIGHT = 1080;
+	public static final int WINDOW_WIDTH = 1200;
+	public static final int WINDOW_HEIGHT = 800;
 	static Group root;
 	Scene scene;
 	public static final ArrayList<KeyCode> keys = new ArrayList<KeyCode>();
@@ -33,18 +33,11 @@ public class Game extends Application {
 		player.setTranslateY(WINDOW_HEIGHT/2-100);
 		root.getChildren().add(player);
 
-		Platform startingPlatform = new Platform(200,10);
+		Platform startingPlatform = new Platform((WINDOW_WIDTH/(64/25)),WINDOW_WIDTH/192);
 		startingPlatform.setTranslateX(WINDOW_WIDTH/2-100);
 		startingPlatform.setTranslateY(WINDOW_HEIGHT/2);
 		startingPlatform.setFill(Color.RED);
 		root.getChildren().add(startingPlatform);
-		
-		for (int i = 0; i < 3; i++) {
-			Platform startingPlatforms = new Platform(200,10);
-			startingPlatforms.setTranslateX(Math.random()*1000+1000);
-			startingPlatforms.setTranslateY(Math.random()*500+300);
-			root.getChildren().add(startingPlatforms);
-		}
 		
 		Text counter = new Text();
 		root.getChildren().add(counter);
@@ -82,12 +75,12 @@ public class Game extends Application {
 
 				if(now-timer >= 10_000_000_00) {
 					Platform platform = new Platform(200,10);
-					platform.setTranslateX(1920+Math.random()*300);
-					platform.setTranslateY(Math.random()*500+300);
+					platform.setTranslateX(WINDOW_WIDTH+Math.random()*WINDOW_WIDTH/(32/5));
+					platform.setTranslateY(Math.random()*(WINDOW_HEIGHT/(96/25))+400);
 					root.getChildren().add(platform);
 					Missile missile = new Missile();
-					missile.setTranslateX(3000);
-					missile.setTranslateY(Math.random()*500+300);
+					missile.setTranslateX(WINDOW_WIDTH*(25/16));
+					missile.setTranslateY(Math.random()*(WINDOW_HEIGHT/(96/25))+400);
 					root.getChildren().add(missile);
 					timer = now;
 				}
@@ -119,8 +112,8 @@ public class Game extends Application {
 				
 				String distance = String.valueOf(Player.PLAYER_DISTANCE);
 				counter.setText(distance);
-				counter.setTranslateX(1800);
-				counter.setTranslateY(30);
+				counter.setTranslateX(50);
+				counter.setTranslateY(50);
 				counter.setFill(Color.BLACK);
 				counter.setStyle("-fx-font: 24 arial;");
 			}
